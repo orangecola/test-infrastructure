@@ -14,8 +14,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
       - name: Check changed files
-        with:
-          script: |
+        run: |
             git checkout origin main
             git diff main --name-only
       - name: Approve PR
