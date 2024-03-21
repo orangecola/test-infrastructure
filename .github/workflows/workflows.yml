@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
       - name: Check changed files
         run: |
-            git diff main --name-only
+            git diff origin/main --name-only
       - name: Approve PR
         uses: actions/github-script@v4
         with:
