@@ -9,15 +9,18 @@ jobs:
   auto-merge:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout and
+      - name: Checkout
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
       - name: Check changed files
+        id: diff
+        continue-on-error: true
         run: |
-            git diff origin/main --name-only
+            git diff origin/main --name-only | grep "prod"
       - name: Approve PR
+        if: steps.diff.outcome != 'success'
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -29,6 +32,7 @@ jobs:
               event: 'APPROVE'
             });
       - name: Merge PR
+        if: steps.diff.outcome != 'success'
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
