@@ -9,13 +9,13 @@ jobs:
   auto-merge:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout and check changed files
+      - name: Checkout and
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
       - name: Check changed files
         run: |
-            git pull origin main
             git diff ${{ github.event.pull_request.head.ref }} --name-only
       - name: Approve PR
         uses: actions/github-script@v4
