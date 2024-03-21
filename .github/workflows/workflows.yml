@@ -15,7 +15,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
       - name: Check changed files
         run: |
-            git checkout origin/main
+            git pull origin main
             git diff ${{ github.event.pull_request.head.ref }} --name-only
       - name: Approve PR
         uses: actions/github-script@v4
