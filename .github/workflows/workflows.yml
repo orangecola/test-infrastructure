@@ -15,7 +15,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
         
       - name: Check changed files
-        with:
+        run:
           script: |
             git checkout origin main
             git diff main --name-only
